@@ -57,6 +57,53 @@ int filetype(struct stat* buf)
 	}
 	return flag;
 }
+
+void filepermission(struct stat* buf,char* permission)
+{
+	switch(buf->st_mode & S_IFMT)
+	{
+		case S_IFSOCK:
+			permission[0]='s';
+			break;
+		case S_IFLNK:
+			permission[0]='l';
+			break;
+		case S_IFREG:
+			permission[0]='-';
+			break;
+		case S_IFBLK:
+			permission[0]='b';
+			break;
+		case S_IFDIR:
+			permission[0]='d';
+			break;
+		case S_IFCHR:
+			permission[0]='c';
+			break;
+		default:
+			permission[0]='?';
+			break;
+	}
+	if(buf->st_mode & S_IRUSR)
+	  permission[1]='r';
+	if(buf->st_mode & S_IWUSR)
+	  permission[2]='w';
+	if(buf->st_mode & S_IXUSR)
+	  permission[3]='x';
+	if(buf->st_mode & S_IRGRP)
+	  permission[4]='r';
+	if(buf->st_mode & S_IWGRP)
+	  permission[5]='w';
+	if(buf->st_mode & S_IXGRP)
+	  permission[6]='x';
+	if(buf->st_mode & S_IROTH)
+	  permission[7]='r';
+	if(buf->st_mode & S_IWOTH)
+	  permission[8]='w';
+	if(buf->st_mode & S_IXOTH)
+	  permission[9]='x';
+	permission[10]='\0';
+}
 int main(int argc,char **argv)
 {
 	if(argc!=2)
@@ -77,5 +124,9 @@ int main(int argc,char **argv)
 	printf("磁盘id：%d\n",(int)statbuf.st_rdev);
 	printf("文件大小：%d\n",(int)statbuf.st_size);
 	filetype(&statbuf);
+	printf("文件的权限：%o  ",statbuf.st_mode & 00777);
+	char permission[11]="----------";
+	filepermission(&statbuf,permission);
+	printf("%s\n",permission);
 	return 0;
 }
