@@ -129,7 +129,7 @@ int main(int argc,char **argv)
 
 	struct stat statbuf;
 	printf("file name:%s \n",argv[1]);
-	if(stat(argv[1],&statbuf)<0)
+	if(lstat(argv[1],&statbuf)<0)
 	  ERR_EXIT("stat");
 	printf("主设备号(块号)：%d,次设备号：%d\n",MAJOR(statbuf.st_dev),MINOR(statbuf.st_dev));
 	printf("i节点号：%d\n",(int)statbuf.st_ino);
