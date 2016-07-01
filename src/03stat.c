@@ -17,6 +17,46 @@
 #define MAJOR(a) (int)((unsigned short)a>>8)
 #define MINOR(a) (int)((unsigned short)a&0xFF)
 
+int filetype(struct stat* buf)
+{
+	int flag=0;
+	printf("文件类型：");
+	mode_t mode;
+	mode=buf->st_mode;
+	switch(mode & S_IFMT)
+	{
+		case S_IFSOCK:
+			printf("socket\n");
+			break;
+		case S_IFLNK:
+			printf("symbolic link\n");
+			break;
+		case S_IFREG:
+			printf("regular file\n");
+			break;
+		case S_IFBLK:
+			flag=1;
+			printf("block device\n");
+			break;
+		case S_IFDIR:
+			printf("directory\n");
+			break;
+		case S_IFCHR:
+			flag=1;
+			printf("character device\n");
+			break;
+		case S_IFIFO:
+			printf("FIFO\n");
+			break;
+		case S_ISUID:
+			printf("set-user-ID bit\n");
+			break;
+		default:
+			printf("no type found\n");
+			break;
+	}
+	return flag;
+}
 int main(int argc,char **argv)
 {
 	if(argc!=2)
@@ -36,6 +76,6 @@ int main(int argc,char **argv)
 	printf("组id：%d\n",(int)statbuf.st_gid);
 	printf("磁盘id：%d\n",(int)statbuf.st_rdev);
 	printf("文件大小：%d\n",(int)statbuf.st_size);
-
+	filetype(&statbuf);
 	return 0;
 }
