@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=gcc
 CFLAGS=-Wall -g
-BIN=01open 02cpfile 03stat 04lstat
+BIN=01open 02cpfile 03stat 04lstat 05fork
 all:$(BIN)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
