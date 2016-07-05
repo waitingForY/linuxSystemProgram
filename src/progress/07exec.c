@@ -16,8 +16,10 @@ int main(void)
 {
 	printf("main entering...\n");
 	printf("pid=%d\n",getpid());
+	char* args[]={"test",NULL};
 	//int ret=execl("/bin/ls","ls","-l",NULL);
-	int ret=execlp("./test","test",NULL);
+	//int ret=execlp("./test","test",NULL);
+	int ret=execvp("./test",args);
 	if(ret==-1)
 	  perror("execl error");
 	printf("main exiting...\n");
