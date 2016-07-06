@@ -24,6 +24,7 @@ int main(int argc,char **argv)
 		printf("Usage: %s src des \n",argv[0]);
 		exit(EXIT_FAILURE);
 	}
+
 	if((src_fp=open(argv[1],O_RDONLY))<0)
 	  ERR_EXIT("open file:");
 	//printf("open success\n");
@@ -35,5 +36,7 @@ int main(int argc,char **argv)
 	{
 		write(des_fp,buf,ret);
 	}
+	close(src_fp);
+	close(des_fp);
 	return 0;
 }
