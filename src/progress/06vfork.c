@@ -5,7 +5,6 @@
 #include <string.h>
 #include <sys/types.h>
 
-
 #define ERR_EXIT(m) \
 	do { \
 		perror(m); \
@@ -13,7 +12,6 @@
 	}while(0)
 
 int gval=100;
-
 int main(void)
 {
 	printf("before fork ,pid=%d\n",getpid());
