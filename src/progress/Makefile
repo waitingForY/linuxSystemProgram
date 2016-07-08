@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=gcc
 CFLAGS=-Wall -g
-BIN=01fork 02fork 03exit 04atexit 05forkwithfile 06vfork 07exec test print_environ 08execle 09my_system
+BIN=01fork 02fork 03exit 04atexit 05forkwithfile 06vfork 07exec test print_environ 08execle 09my_system 10wait 11waitpid
 all:$(BIN)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
