@@ -22,8 +22,9 @@ int my_system(const char* command)
 	if(pid==0)
 	{
 		status=1;
-		execl("/bin/sh","sh","-c",command,NULL);
-		exit(127);
+		int ret=execl("/bin/sh","sh","-c",command,NULL);
+		if(ret==-1)
+		  exit(127);
 	}
 	int ret=waitpid(pid,&status,0);
 	if(ret==-1)
@@ -35,6 +36,5 @@ int my_system(const char* command)
 int main(void)
 {
 	my_system("ls -l");
-
 	return 0;
 }
