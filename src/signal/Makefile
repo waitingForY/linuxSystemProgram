@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=gcc
 CFLAGS=-Wall -g
-BIN=01signal
+BIN=01signal 02signal
 
 all:$(BIN)
 %.o:%.c
