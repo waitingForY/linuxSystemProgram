@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=gcc
 CFLAGS=-Wall -g
-BIN=01kill 02kill 03kill
+BIN=04pause
 
 all:$(BIN)
 %.o:%.c
