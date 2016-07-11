@@ -15,21 +15,22 @@
 void newhandler(int sig)
 {
 	printf("recv a sig,which number=%d\n",sig);
-
 }
 
 int main(void)
 {
-	__sighandler_t oldhander;
-	oldhander=signal(SIGINT,newhandler);
-	if(oldhander==SIG_ERR)
-	  ERR_EXIT("signal error");
-	while(getchar()!='\n')
-	  ;
-	if(signal(SIGINT,oldhander)==SIG_ERR)
-	  ERR_EXIT("signal error");
-	for(;;)
-	  ;
+	if(signal(SIGUSR1,newhandler)==SIG_ERR)
+	  ERR_EXIT("signal");
+	pid_t pid;
+	pid=fork();
+	if(pid==-1)
+	  ERR_EXIT("fork error");
+	if(pid==0)
+	{
+		if(kill(getppid(),SIGUSR1)==-1)
+		  ERR_EXIT("kill error");
+	}
+	sleep(5);
 
 	return 0;
 }
