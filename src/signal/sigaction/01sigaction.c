@@ -11,24 +11,20 @@
 		perror(m); \
 		exit(EXIT_FAILURE); \
 	}while(0);
-typedef void (*sighandler_t)(int);
+
 void newhandler(int sig)
 {
 	printf("recv a sig,which number=%d\n",sig);
-
 }
-
 int main(void)
 {
-	sighandler_t oldhander;
-	oldhander=signal(SIGINT,newhandler);
-	if(oldhander==SIG_ERR)
-	  ERR_EXIT("signal error");
-	while(getchar()!='\n')
-	  ;
-	if(signal(SIGINT,oldhander)==SIG_ERR)
-	  ERR_EXIT("signal error");
+	struct sigaction act;
+	act.sa_handler=newhandler;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags=0;
+	if(sigaction(SIGINT,&act,NULL)<0)
+	  ERR_EXIT("sigaction error");
 	for(;;)
-	  ;
+	  pause();
 	return 0;
 }
