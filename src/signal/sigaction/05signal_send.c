@@ -30,12 +30,20 @@ int main(int argc,char **argv)
 	  ERR_EXIT("sigqueue error");
 	if(sigqueue(pid,SIGINT,val)<0)
 	  ERR_EXIT("sigqueue error");
+	/*
 	if(sigqueue(pid,SIGRTMIN,val)<0)
 	  ERR_EXIT("sigqueue error");
 	if(sigqueue(pid,SIGRTMIN,val)<0)
 	  ERR_EXIT("sigqueue error");
 	if(sigqueue(pid,SIGRTMIN,val)<0)
 	  ERR_EXIT("sigqueue error");
+	  */
+	if(kill(pid,SIGUSR1)<0)
+	  ERR_EXIT("kill error");
+	if(kill(pid,SIGUSR1)<0)
+	  ERR_EXIT("kill error");
+	if(kill(pid,SIGUSR1)<0)
+	  ERR_EXIT("kill error");
 	sleep(5);
 	kill(pid,SIGUSR1);
 	return 0;

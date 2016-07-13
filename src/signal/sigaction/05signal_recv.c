@@ -35,13 +35,13 @@ int main(void)
 	act.sa_handler=newhandler;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags=0;
-
+/*
 	sigset_t set;
 	sigemptyset(&set);
 	sigaddset(&set,SIGINT);
 	sigaddset(&set,SIGRTMIN);
 	sigprocmask(SIG_BLOCK,&set,NULL);
-
+*/
 	if(sigaction(SIGINT,&act,NULL)<0)
 	  ERR_EXIT("sigaction error");
 	
