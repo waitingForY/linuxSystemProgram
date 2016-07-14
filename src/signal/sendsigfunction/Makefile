@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=gcc
 CFLAGS=-Wall -g
-BIN=01alarm 02rentant
+BIN=01alarm 02rentant 03setitimer
 
 all:$(BIN)
 %.o:%.c
