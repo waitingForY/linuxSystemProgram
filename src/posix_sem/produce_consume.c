@@ -52,7 +52,7 @@ void *consume(void *arg)
 			printf("\n");
 		}
 		consume_id=g_buffer[out];
-		printf("begin produce product %d\n",consume_id);
+		printf("begin consume product %d\n",consume_id);
 		g_buffer[out]=-1;
 		out=(out+1)%BUFFSIZE;
 		printf("end consume,product %d\n",consume_id);
@@ -83,7 +83,7 @@ void *produce(void *arg)
 			  printf("\t<--produce");
 			printf("\n");
 		}
-		printf("begin consume product %d\n",produce_id);
+		printf("begin produce product %d\n",produce_id);
 		g_buffer[in]=produce_id;
 		in=(in+1)%BUFFSIZE;
 		printf("end produce,product %d\n",produce_id++);
